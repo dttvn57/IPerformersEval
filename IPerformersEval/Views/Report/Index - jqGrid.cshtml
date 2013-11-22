@@ -1,0 +1,394 @@
+﻿@using PerformersEval.Models.Grid;
+@{
+    //ViewBag.Title = Resources.Resource.VisitorLogIndexTitle;
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    //
+    int pageSize = 20;
+    if (Session["ReportGridSettings"] != null)
+    {
+        //
+        // Get from cache the last page zise selected by the user. 
+        //
+        GridSettings grid = new GridSettings((string)Session["ReportGridSettings"]);
+        pageSize = grid.PageSize;
+    }
+    //
+    // Restore the last search params from cache.
+    //
+    string startDate = (Session["StartDate"] == null
+        ? string.Empty
+        : ((DateTime)Session["StartDate"]).ToShortDateString());
+    string endDate = (Session["EndDate"] == null
+        ? string.Empty
+        : ((DateTime)Session["EndDate"]).ToShortDateString());
+}
+<table>
+    <tr>
+        <td style="text-align: right; margin-top: 0px;">
+            @using (Ajax.BeginForm("Search", "Report", 
+                new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "jqGrid",
+                    OnSuccess = "showGrid()"
+                }))
+            {
+                <table>
+                    <tr>
+                        <td>
+                            <label>Start Date</label>
+                            @Html.TextBox("from", null, htmlAttributes: new { @class = "date"})
+                            @*
+                            <input type="text" id="from" name="from" data-datepicker="true" value="@startDate" />
+                            *@
+                        </td>
+                        <td>
+                            <label>End Date</label>
+                            @Html.TextBox("to", null, htmlAttributes: new { @class = "date"})   @*, style = "width:5em" })*@
+                            @*
+                            <input type="text" id="to" name="to" data-datepicker="true" value="@endDate" />
+                            *@
+                        </td>
+                        <td style="text-align: right; margin-top: 0px;">
+                            <input type="submit" name="_search" value="Apply Filter" class="searchButton" />
+                        </td>
+                    </tr>
+                </table>
+            }
+        </td>
+    </tr>
+</table>
+<div id="jqGrid">
+    @Html.Partial("_ReportGrid")
+</div>
+<script type="text/javascript">
+    var paramFromView = {
+        DeleteAllCaption: 'Delete All',
+        ClearGridUrl: '@Url.Content("~/Report/ClearGridData")',
+        DeleteAllConfirmationMessage: 'Are you sure you want to delete all records?',
+        Url: '@Url.Content("~/Report/GetData")',
+        Width: 790,
+        Height: 464,
+        Caption: 'Welcome!',
+        Name: 'Name',
+        SubmitDate: 'Submit Date',
+        Vendor: 'Vendor',
+        Actions: 'Actions',
+        PageSize: @pageSize
+    }
+</script>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.5.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+
+   @* @Content.Script("ReportGrid.js", Url)*@
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".date").datepicker();
+        });
+    </script>
+   <script src="@Url.Content("~/Scripts/ReportGrid.js")" type="text/javascript"></script>
+}
+
+
+
+@* ==================================================================================================
+@using PerformersEval.Models;
+@model IEnumerable<PerformersEval.Models.FormsStatus>
+
+@{
+    ViewBag.Title = "Forms Status";
+}
+
+@ * 
+    @if (TempData["STATUS"] != null)
+    {   
+        <h3 style="color:red">@TempData["STATUS"]</h3>
+    }
+
+        
+@using (Html.BeginForm("GetReport", "Report", FormMethod.Get))
+{ 
+* @
+
+@using (Ajax.BeginForm("Status",
+    new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "FormsStatusList"
+    }))
+{     
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+       <table style="width: 100%; border:0 none; table-layout: fixed; border-collapse: separate">
+            <colgroup>
+                <col style="width:12%" />
+                <col style="width:1em" />
+                <col style="width:40%" />
+                <col style="width:45%" />
+            </colgroup>
+    
+            <tr>
+                <th>Vendor</th>
+                <td></td>
+                <td >@Html.TextBox("username", null, htmlAttributes: new { maxlength="50" })</td>
+            </tr>
+            <tr>
+                <th colspan="3">Date Range</th>
+            </tr>
+            <tr>
+                <td style="text-align:right">From</td>
+                <td></td>
+                <td>
+                    @Html.TextBox("fromDate",  null, new { @class = "date", style = "width:5em" })
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right">To</td>
+                <td></td>
+                <td>
+                    @Html.TextBox("toDate",  null, new { @class = "date", style = "width:5em" })
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2"></td>
+                <td ><input type="submit" value="Execute" /></td>
+            </tr>  
+    
+        </table>
+
+        }
+
+<table style="border: 0 none;">
+    <colgroup>
+        @for (int i = 0; i < 25; i++)
+        { 
+            <col style="width:4%;"/>
+        }
+    </colgroup>
+
+    <th colspan="2" style="text-align:left">Name</th>
+    <td colspan="2"></td>
+    <th colspan="2" style="text-align:left">Vendor</th>
+    <td colspan="1"></td>
+    <th colspan="2" style="text-align:left">Sub W-9</th>
+    <td colspan="1"></td>
+    <th colspan="4" style="text-align:left">Service Agreement</th>
+    <td colspan="1"></td>
+    <th colspan="5" style="text-align:left">Auto Insurance</th>
+    @ *
+    <td colspan="1"></td>
+    <th colspan="2" style="text-align:left">Invoice</th>
+    * @
+</table>    
+
+<div id="jqGrid">
+    @Html.Partial("FormsStatusList")
+</div>
+
+@ *
+@if (Model != null && Model.Count() > 0)
+{ 
+    if (TempData["STATUS"] != null)
+    {
+        TempData["STATUS"] = null;      @ * reset so _FormsStatusView can return the correct records * @
+    }
+        
+    @Html.Partial("_FormsStatusView", Model);
+}
+* @
+ @ *
+   @:<strong>Check Forms Status:</strong>
+
+    @:<br />
+@:<br />    
+@:OR
+@:<br />    
+@:<br />
+}
+
+@{
+    if (TempData["STATUS"] != null)
+    {   
+        <h3 style="color:red">@TempData["STATUS"]</h3>
+    }
+
+    @:<strong>Check Forms Status:</strong>
+}
+
+using (Ajax.BeginForm("Status",
+    new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "FormsStatusList"
+    }))
+{ 
+    @Html.ValidationSummary(false)
+
+    <table style="width:40%; border:solid; border-width:1px;">
+        <colgroup>
+                <col style="width:15%;"/>
+                <col style="width:15%;"/>
+        </colgroup>
+
+        <tr>
+            <td colspan="2" style="text-align: left">Enter the Taxpayer Identification Number (TIN):</td>
+        </tr>
+        <tr>
+            @if (Model != null && Model.Count() == 1)
+            {
+                var modelTIN = Model.First().TIN;
+                <td><span><input type="text" value=@modelTIN required name="s"/></span></td>                
+            }
+            else
+            {
+                <td><span><input type="text" name="s"/></span></td>
+            }
+            <td>(no dash)</td>
+        </tr>    
+        <tr>
+           <td colspan="2"><input type="submit" value="Check Status" /></td>
+        </tr>  
+    </table>
+}
+    
+<br /><br />
+<table style="border: 0 none;">
+    <colgroup>
+        @for (int i = 0; i < 25; i++)
+        { 
+            <col style="width:4%;"/>
+        }
+    </colgroup>
+
+    <th colspan="2" style="text-align:left">Name</th>
+    <td colspan="2"></td>
+    <th colspan="2" style="text-align:left">Vendor</th>
+    <td colspan="1"></td>
+    <th colspan="2" style="text-align:left">Sub W-9</th>
+    <td colspan="1"></td>
+    <th colspan="4" style="text-align:left">Service Agreement</th>
+    <td colspan="1"></td>
+    <th colspan="5" style="text-align:left">Auto Insurance</th>
+    @ *
+    <td colspan="1"></td>
+    <th colspan="2" style="text-align:left">Invoice</th>
+    * @
+</table>    
+<div id="FormsStatusList">
+    @if (Model != null && Model.Count() > 0)
+    { 
+        if (TempData["STATUS"] != null)
+        {
+            TempData["STATUS"] = null;      @* reset so _FormsStatusView can return the correct records * @
+        }
+        
+        @Html.Partial("_FormsStatusView", Model);
+    }
+</div>
+
+@ * -------------------------------------------------------------------------------
+}
+
+@using (Ajax.BeginForm("Status",
+    new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "FormsStatusList"
+    }))
+{ 
+    <table style="width:60%; border:solid; border-width:1px;">
+        <colgroup>
+                <col style="width:5%;"/>
+                <col style="width:25%;"/>
+        </colgroup>
+
+        <tr>
+            <td colspan="2" style="text-align: left">Enter the following info <b>or</b> leave them blank to create forms and click on "Check Status":</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Name:</td>
+            <td><span><input type="text" name="PerformerName"/></span></td>
+        </tr>  
+        <tr>
+            <td style="text-align: right;"><b>And</b></td>
+        </tr>  
+        <tr>
+            <td style="text-align: right;">Email:</td>
+            <td><span><input type="text" name="PerformerEmail"/></span></td>
+        </tr>    
+        <tr>
+           <td colspan="2"><input type="submit" value="Check Status" /></td>
+        </tr>  
+    </table>
+}
+<br /><br />
+<table style="border: 0 none;">
+    <colgroup>
+        @for (int i = 0; i < 25; i++)
+        { 
+            <col style="width:4%;"/>
+        }
+    </colgroup>
+
+    <th colspan="2" style="text-align:left">Performer</th>
+    <td colspan="2"></td>
+    <th colspan="2" style="text-align:left">Vendor</th>
+    <td colspan="1"></td>
+    <th colspan="2" style="text-align:left">Sub W-9</th>
+    <td colspan="1"></td>
+    <th colspan="4" style="text-align:left">Service Agreement</th>
+    <td colspan="1"></td>
+    <th colspan="2" style="text-align:left">Auto Ins.</th>
+    <td colspan="1"></td>
+    <th colspan="2" style="text-align:left">Invoice</th>
+</table>        
+        
+<div id="FormsStatusList">
+    @if (Model != null)
+    { 
+         @Html.Partial("_FormsStatusView", Model);
+        @*
+        foreach (var item in @Model)
+        {
+            @Html.Partial("_FormsStatusView", item);
+        }
+        * @
+    }
+</div>
+
+------------------------------------------------------------------------------- * @
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.5.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".date").datepicker();
+        });
+    </script>
+}
+
+========================================================================================================*@

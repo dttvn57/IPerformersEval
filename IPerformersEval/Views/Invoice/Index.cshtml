@@ -1,0 +1,56 @@
+﻿@model IEnumerable<IPerformersEval.Models.Invoice>
+
+@{
+    ViewBag.Title = "Sub W-9";
+
+    var s = "";
+    if (Model.FirstOrDefault() != null)
+    {
+        s = Model.FirstOrDefault().SSN;
+    }
+}
+
+<p>
+    @Html.ActionLink("Create New Invoice", "Create", new { spec = s, Name = "" }, null)
+</p>
+
+@if (Model.FirstOrDefault().Name != null) 
+{ 
+    <table>
+        <colgroup>
+            <col style="width:25%;" />
+            <col style="width:20%;" />
+            <col style="width:5%;" />
+            <col style="width:45%;" />
+        <colgroup>
+
+        <tr>
+            <th style="text-align:left">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th style="text-align:left">
+                @Html.DisplayNameFor(model => model.Addr1)
+            </th>
+        </tr>
+
+        <tr>
+            <td colspan="2"><hr /></td>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Addr1)
+                </td>
+                <td colspan="1"></td>
+
+                <td>
+                    @Html.ActionLink("Modify", "Edit", new { id=item.InvoiceID }) 
+                </td>
+            </tr>
+        }
+    </table>
+}

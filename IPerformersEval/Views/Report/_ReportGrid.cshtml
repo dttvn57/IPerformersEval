@@ -1,0 +1,248 @@
+﻿<table id="_reportGrid" cellpadding="0" cellspacing="0">
+</table>
+<div id="_reportPager" style="text-align: center;">
+</div>
+
+
+
+@*
+
+@using PerformersEval.Models;
+
+@model IEnumerable<PerformersEval.Models.FormsStatus>
+
+        
+@if (TempData != null && TempData["STATUS"] == null)
+{
+    <table class="noborder">
+        <colgroup>
+            @for (int i = 0; i < 25; i++)
+            { 
+                <col style="width:4%;"/>
+            }
+        </colgroup>
+
+        @if (@Model != null)
+        {
+            if (@Model.Count() == 0)
+            {
+                <tr>
+
+                    <td colspan="4" style="color:red"><b>Please create these forms</b></td>
+
+                    <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                    <td style="vertical-align: middle;text-align:left">@Html.ActionLink("Create", "Create", "Vendor")</td>
+
+                    <td colspan="1"></td>
+                    <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                    <td style="text-align:left">@Html.ActionLink("Create", "Create", "W9")</td>
+
+                    <td colspan="1"></td>
+                    <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                    <td style="text-align:left">@Html.ActionLink("Create", "Create", "Performer")</td>
+
+                    <td colspan="3"></td>
+                    <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                    <td style="text-align:left">@Html.ActionLink("Upload", "Upload", "Upload")</td>
+
+                    <td colspan="1"></td>
+                    <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                    <td style="text-align:left">@Html.ActionLink("Create", "Create", "Invoice")</td>
+                </tr>
+
+            }
+            else
+            {
+                foreach (var item in @Model)
+                {
+
+                    var vendorFilled = false;
+                    if (item.TIN != null)
+                    {
+                        vendorFilled = true;
+                    }
+
+                    var w9Filled = false;
+                    if (item.SubW9_TIN != null)
+                    {
+                        w9Filled = true;
+                    }
+
+                    var performerFilled = false;
+                    if (item.Performer_TIN != null)
+                    {
+                        performerFilled = true;
+                    }
+
+                    var autoInsUploaded = false;
+                    if (item.AutoInsuranceFileName != null)
+                    {
+                        autoInsUploaded = true;
+                    }
+                
+                    @ *
+                    var invoiceFilled = false;
+                    if (item.Invoice_TIN != null)
+                    {
+                        invoiceFilled = true;
+                    }
+                    * @
+                    <tr>
+
+                        <td colspan="4">@item.PerformerName</td>
+
+                        @if (@vendorFilled)
+                        { 
+                            <td style="text-align:right"><img src="~/Images/checkmark.png" alt="" /></td> 
+                            
+                            if (item.FormsSent)
+                            {    
+                                <td style="vertical-align: middle;text-align:left">@Html.ActionLink("View", "Details", "Vendor", new { s = item.TIN }, null)</td>
+                            }
+                            else
+                            {
+                                <td style="vertical-align: middle;text-align:left">@Html.ActionLink("Modify", "Edit", "Vendor", new { s = item.TIN }, null)</td>
+                                @ *
+                                <td style="vertical-align: middle;text-align:left">@Html.ActionLink("Modify", "Edit", "Vendor", new { Vendor_FederalTaxID = item.TIN, Name = item.PerformerName }, null)</td>
+                                * @
+                            }
+                        }
+                        else
+                        { 
+                            <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                            <td style="vertical-align: middle;text-align:left">@Html.ActionLink("Create", "Create", "Vendor")</td>
+                        }
+
+                        <td colspan="1"></td>
+                        @if (@w9Filled)
+                        { 
+                            <td style="text-align:right"><img src="~/Images/checkmark.png" alt="" /></td> 
+                            
+                            if (item.FormsSent)
+                            {    
+                                 @ *
+                               <td style="text-align:left">@Html.ActionLink("Print W9", "Print", "W9", new { id = 1 }, null)</td>
+                                * @
+                                <td style="text-align:left">@Html.ActionLink("View", "Details", "W9", new { s = item.TIN }, null)</td>
+                            }
+                            else
+                            {
+                                <td style="text-align:left">@Html.ActionLink("Modify", "Edit", "W9", new { s = item.TIN }, null)</td>
+                            }
+                        }
+                        else
+                        { 
+                            <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                            <td style="text-align:left">@Html.ActionLink("Create", "Create", "W9", new { s = item.TIN, Name = item.PerformerName }, null)</td>
+                        }
+
+                        <td colspan="1"></td>
+                        @if (@performerFilled)
+                        {
+                            <td style="vertical-align: middle; text-align:right"><img src="~/Images/checkmark.png" alt="" /></td> 
+                            
+                            if (item.FormsSent)
+                            {    
+                                <td style="vertical-align: middle;text-align:left">@Html.ActionLink("View", "Details", "Performer", new { FullName = item.PerformerName, PerformerEmail = item.PerformerEmail, s = item.TIN }, null)</td>
+                            }
+                            else
+                            {
+                                <td style="vertical-align: middle;text-align:left">@Html.ActionLink("Modify", "Edit", "Performer", new { FullName = item.PerformerName, PerformerEmail = item.PerformerEmail, s = item.TIN }, null)</td>
+                            }
+                        }
+                        else
+                        { 
+                            <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                            <td style="text-align:left">@Html.ActionLink("Create", "Create", "Performer", new { FullName = item.PerformerName, PerformerEmail = item.PerformerEmail, s = item.TIN }, null)</td>
+                        }
+
+                        <td colspan="3"></td>
+                        @if (@autoInsUploaded)
+                        {
+                            <td style="vertical-align: middle; text-align:right"><img src="~/Images/checkmark.png" alt="" />&nbsp;&nbsp;</td> 
+                            
+                            if (item.FormsSent)
+                            {
+                                <td colspan="4"><a href= @item.AutoInsuranceFileName target="_blank">View</a></td>
+                            }
+                            else
+                            {
+                                <td colspan="4" style="text-align:left">@Html.ActionLink("Upload Insurance", "UploadDocument", "FormsStatus", new { s = item.TIN }, null)</td>
+                            }
+                        }
+                        else
+                        { 
+                            <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                            <td colspan="4" style="text-align:left">@Html.ActionLink("Upload Insurance", "UploadDocument", "FormsStatus", new { s = item.TIN }, null)</td>
+                        }
+
+                        @if (@performerFilled && @vendorFilled && @w9Filled && @autoInsUploaded)
+                        {
+                            if (!item.FormsSent)
+                            {
+                                <td colspan="4">@Html.ActionLink("Submit Forms >>", "SubmitAllForms", "FormsStatus", new { spec = item.TIN, name = item.PerformerName }, htmlAttributes: new { style = "font-weight: bold;" })</td>
+                            }
+                            else
+                            { 
+                                <td colspan="4" style="text-align:left">@Html.ActionLink("Invoice >>", "Index", "Invoice", new { spec = item.TIN, Name = item.PerformerName }, null)</td>
+                                @ *
+                                <td colspan="4" style="text-align:left">@Html.ActionLink("Invoice", "Create", "Invoice", new { spec = item.TIN, Name = item.PerformerName }, null)</td>
+                                * @
+                            }
+                        }
+
+                        @ *
+                        <td colspan="1"></td>
+                        @if (@invoiceFilled)
+                        {
+                            <td style="vertical-align: middle; text-align:right"><img src="~/Images/checkmark.png" alt="" /></td> 
+                            <td style="vertical-align: middle;text-align:left">@Html.ActionLink("Modify", "Edit", "Invoice", new { TIN = item.TIN, Name = item.PerformerName }, null)</td>
+                        }
+                        else
+                        { 
+                            <td style="text-align:right"><img src="~/Images/uncheckmark.png" alt="" /></td>
+                            <td style="text-align:left">@Html.ActionLink("Create", "Create", "Invoice", new { TIN = item.TIN, Name = item.PerformerName }, null)</td>
+                        }
+                        * @
+                    </tr>
+                }
+            }
+        }
+
+    </table>
+
+
+
+
+
+    @section scripts {
+        <script type="text/javascript">
+            function successCall(result) {
+                alert($('input[type=file]').val());
+               // $("#workSchedule").append(result);            
+            }
+       </script>
+
+        <script type="text/javascript">
+            function failureCall(result) {
+                alert($('input[type=file]').val());
+                // $("#workSchedule").append(result);            
+            }
+       </script>
+
+        <script type="text/javascript">
+            function completeCall(result) {
+                alert($('input[type=file]').val());
+                // $("#workSchedule").append(result);            
+            }
+       </script>
+
+    }
+    
+}
+else
+{ 
+    <h3 style="color:red">@TempData["STATUS"]</h3>
+}
+
+================ *@

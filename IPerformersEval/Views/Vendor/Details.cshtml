@@ -1,0 +1,329 @@
+﻿@model IPerformersEval.Models.Vendor
+
+@{
+    ViewBag.Title = "View Vendor";
+}
+
+@*
+@using (Html.BeginForm("Edit", "Vendor", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+ @Html.HiddenFor(model => model.VendorID)
+@Html.HiddenFor(model => model.Vendor_FederalTaxID)
+*@  
+
+<p style="text-align: center;">
+<strong>REQUEST TO ADD/MODIFY ALCOLINK VENDOR RECORD
+<br /><br />
+E-Mail/FAX to: Auditor, Vendor Manager, QIC 20111, FAX: (510) 272-6502 or 26502</strong>
+<br />
+</p>
+
+<table class="noborder"> <!-- -->
+    <colgroup>
+        @for (var i = 0; i < 10; i++)
+        {
+            <col style="width:10%" />
+        }
+    </colgroup>
+
+   <tr>
+        <th class="vendor">Sent by:</th>
+        <td class="vendor-right">Name:</td>
+        <td colspan="7"><span>@Html.TextBoxFor(m => m.SentBy_Name, htmlAttributes: new { disabled = "disabled" })</span></td>
+   </tr>
+    <tr>
+        <th colspan="1"></th>
+        <td class="vendor-right">Department Name:</td>
+        <td colspan="7"><span>@Html.TextBoxFor(m => m.SentBy_Department, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <th colspan="1"></th>
+        <td class="vendor-right">QIC:</td>
+        <td><span>@Html.TextBoxFor(m => m.SentBy_QIC, htmlAttributes: new { disabled = "disabled" })</span></td>
+
+        <td class="vendor-right">Telephone:</td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.SentBy_Phone, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.SentBy_Phone)</span></td>
+        
+        <td class="vendor-right">FAX:</td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.SentBy_FAX, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.SentBy_FAX)</span></td>
+    </tr>
+
+    <tr>
+        <th class="vendor">Request:</th>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Request_AddNewVendor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Add new vendor</td>
+     </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="5" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Request_AddNewDBAForExistingVendor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Add new doing-business-as (DBA) name for exsisting vendor</td>
+     </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="5" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Request_AddNewAddressForExistingVendor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Add new address for existing vendor</td>
+     </tr>
+
+    <tr>
+        <th colspan="1"></th>
+        <td colspan="2"><b>Change (check one)</td>
+        <td style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Request_ChangeNameForExistingVendor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Name</td>
+        <td style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Request_ChangeDBAForExistingVendor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;DBA</td>
+        <td colspan="3" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Request_ChangeAddressForExistingVendor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Address for existing vendor</td>
+     </tr>
+
+<!-- Vendor Information -->
+    <tr>
+        <th class="vendor" colspan="4">Vendor Information:</th>
+    </tr>
+    <tr>
+        <th colspan="1"></th>
+        <td colspan="2">ALCOLINK Vendor # (if known):</td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.Vendor_ALCOLINKNumber, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.Vendor_ALCOLINKNumber)</span></td>
+     </tr>
+    <tr>
+
+        <th colspan="1"></th>
+        <td colspan="2">Full Legal Name:</td>
+        <td colspan="5"><span>@Html.TextBoxFor(m => m.Vendor_FullName, htmlAttributes: new { disabled = "disabled" })</span></td>
+     </tr>
+    <tr>
+
+        <th colspan="1"></th>
+        <td colspan="2">DBA Name:</td>
+        <td colspan="5"><span>@Html.TextBoxFor(m => m.Vendor_DBA, htmlAttributes: new { disabled = "disabled" })</span></td>
+     </tr>
+
+<!-- Type of Entity -->
+    <tr>
+        <th colspan="1"></th>
+        <td colspan="2">Type of Entity:</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Entity_Individual, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Individual</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Entity_SoleProprietor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Sole Proprietor</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Entity_Partnership, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Partnership</td>
+    </tr>   
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Entity_Corporation, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Corporation</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Entity_TaxExempted, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Tax-Exempted</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Entity_GovOrTrust, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Goverment or Trust</td>
+     </tr>
+
+<!-- Check the box... -->
+     <tr>
+         <td colspan="1"></td>
+        <th colspan="8" style="text-align:left">Check the boxes that apply to Alameda County payments you may receive</th>
+     </tr>
+     <tr>
+        <td></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_GoodsOnly, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Goods Only</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_GoodsAndServices, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Goods and Services</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_RentsLeases, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Rents/Leases</td>
+        <td colspan="3" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_RentsLeasesAsAgent, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Rents/Leases paid to you as the agent</td>
+     </tr>
+     <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_MedicalService, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Medical Services</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_LegalService, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Legal Services</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_OtherServices, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Other Services (describe)</td>
+        <td colspan="5"><span>@Html.TextBoxFor(m => m.Vendor_Payment_OtherServices_Desc, htmlAttributes: new { disabled = "disabled" })</span></td>
+     </tr>
+     <tr>
+        <td colspan="1"></td>
+        <td colspan="8" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_Settlement, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Settlements, Judgement, Refunds (if checked, skip <b>Composition of Ownership</b> section below)</td>
+    </tr>
+     <tr>
+        <td colspan="1"></td>
+        <td colspan="8" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Payment_CourtAppointedServices, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Court-Appointed Services (if checked, skip <b>Composition of Ownership</b> section below)</td>
+    </tr>
+
+     
+<!-- federal tax id -->
+    <tr><td><br /></td></tr>
+     <tr>
+        <td colspan="1"></td>
+        <td colspan="2">Federal Tax ID Number <b>(required):</b></td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.Vendor_FederalTaxID, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="1" style="padding-left:6%">
+             @Html.RadioButtonFor(m => m.Vendor_IsFederalTaxID, Model.Vendor_IsFederalTaxID ? "true" : "false", new { id = "FEIN", disabled = "disabled" })
+        </td>
+        <td colspan="2" style="text-align:left">
+            @Html.Label("FEIN", "Federal Tax ID")
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="1" style="padding-left:6%">
+            @Html.RadioButtonFor(m => m.Vendor_IsFederalTaxID,  Model.Vendor_IsFederalTaxID ? "true" : "false", new { id = "SSN", disabled = "disabled" })
+        </td>
+        <td colspan="2" style="text-align:left">
+            @Html.Label("SSN", "Social Security Number")
+        </td>
+    </tr>
+
+<!-- po box -->
+     <tr>
+        <td colspan="1"></td>
+        <td colspan="2">PO Box Street Address:</td>
+        <td colspan="6"><span>@Html.TextBoxFor(m => m.Vendor_Addr1, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="6"><span>@Html.TextBoxFor(m => m.Vendor_Addr2, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td class="vendor-right">City:</td>
+        <td colspan="6"><span>@Html.TextBoxFor(m => m.Vendor_City, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td class="vendor-right">State:</td>
+        <td><span>@Html.TextBoxFor(m => m.Vendor_State, htmlAttributes: new { disabled = "disabled", style="width:2em", placeholder="State", maxlength="2"})</span></td>
+        <td class="vendor-right">Zip:</td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.Vendor_Zip, htmlAttributes: new { disabled = "disabled",  style = "width:9em", placeholder = "Zip", maxlength = "10" })</span></td>
+    </tr>
+
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="1"><b>Check one:</b></td>
+        <td colspan="3" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_Local, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;<b>Alameda County</b> - Local Vendor</td>
+        <td colspan="3" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Vendor_NonLocal, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;<b>Non-County</b> - Other - Non Local Vendor</td>
+    </tr>
+
+<!-- vendor's contact -->
+     <tr>
+        <td colspan="1"></td>
+        <td colspan="2">Vendor Contact's Name:</td>
+        <td colspan="6"><span>@Html.TextBoxFor(m => m.Contact_Name, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+     <tr>
+        <td colspan="1"></td>
+        <td colspan="2">Vendor Contact's Telephone:</td>
+        <td colspan="3"><span>@Html.TextBoxFor(m => m.Contact_Phone, htmlAttributes: new { disabled = "disabled" })</span></td>
+        <td class="vendor-right">FAX:</td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.Contact_FAX, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="2">Vendor Contact's E-mail:</td>
+        <td colspan="6"><span>@Html.TextBoxFor(m => m.Contact_Email, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+
+</table>
+
+
+
+<!-- Composition -->
+<div style="border-style:solid">
+<table class="noborder">
+    <colgroup>
+        @for (var i = 0; i < 25; i++)
+        {
+            <col style="width:4%;" />  <!--background-color:lightgray-->
+        }
+    </colgroup>
+
+    <tr>
+        <th colspan="25" style="text-align: center;">Composition of Ownership. This is a <u>Required Section.</u></th>
+    </tr>
+    <tr>
+        <th colspan="19" style="text-align: left">Are you a non-profit, a publicly traded entity, a church, a public school, or a government?</th>
+        <td colspan="2"  style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Composition_NonProfit_Public_Yes, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Yes</td>
+        <td colspan="2"  style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Composition_NonProfit_Public_No, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;No</td>
+    </tr>
+    <tr>
+        <th colspan="25" style="text-align: left">If "Yes", skip Ethnicity and Gender below. The collection of ethnicity and gender data is for statistical and demographic purposes only. <u>Please check the one most applicable category in each column:</u></th>
+    </tr>
+</table>
+
+<div style="border-style:solid; border-width: 1px;"></div> 
+<table class="noborder">
+    <colgroup>
+            <col style="width:10%;"/>
+            <col style="width:5%;"/>
+            <col style="width:30%;"/>
+            <col style="width:5%;"/>
+            <col style="width:50%;"/>
+    </colgroup>
+
+    <tr>
+        <th style="text-align: left;"><u>Ethnicity</u></th>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_Black, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;African American or Black (> 50%)</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_Hispanic, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Hispanic or Latino (> 50%)</td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_Indian, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;American Indian or Alaskan Native (> 50%)</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_Hawaiian, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Native Hawaiian or other Pacific Islander (> 50%)</td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_Asian, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Asian (> 50%)</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_MultiEthnic_Minority_Ownership, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Multi-ethnic minority ownership (> 50%)</td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_Caucasian, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Caucasian / White (> 50%)</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_MultiEthnic_Ownership, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Multi-ethnic ownership (50% Minority - 50% Non-Minority)</td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Ethnicity_Filipino, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Filipino (> 50%)</td>
+    </tr>
+
+    <tr>
+        <th style="text-align: left;"><u>Gender</u></th>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Gender_Female, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Female (> 50%)</td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Gender_Male, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;Male (> 50% ownershhip)</td>
+    </tr>
+</table>
+</div>
+<br />
+
+<b>List the Product and/or Services Vendor is interested in providing: including North American Industry Classfication System (NAICS) Code (available at <a href="https://eweb1.sba.gov/naics/dsp_naicssearch2.cfm" target="_blank">https://eweb1.sba.gov/naics/dsp_naicssearch2.cfm</a>) </b>
+<br />
+@Html.TextBoxFor(m => m.ProductsServices, htmlAttributes: new { disabled = "disabled" })
+
+<!-- Auditor's Acknowledgement -->
+<div style="border-style:solid; border-width: 1px;"></div> 
+<div><b>Auditor's Acknowledgement by&nbsp;&nbsp;</b>@Html.TextBoxFor(m => m.Auditor_Name, htmlAttributes: new { disabled = "disabled", style="width:30em" })&nbsp;&nbsp;&nbsp;&nbsp;Date)&nbsp;&nbsp;@Html.TextBoxFor(m => m.Auditor_SignedDate, htmlAttributes: new { disabled = "disabled", style="width:5em" })</div>
+
+<table class="nobordercollapse">
+    <colgroup>
+            <col style="width:10%;"/>
+            <col style="width:10%;"/>
+            <col style="width:80%;"/>
+    </colgroup>
+
+    <tr>
+        <td colspans="1"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Auditor_Add, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;
+        The Auditor's Office added/modified the vendor record according to the information provided above.
+         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>The assigned ALCOLINK vendor nunber is</b>&nbsp;&nbsp;@Html.TextBoxFor(m => m.Assigned_ALCOLINK_Number, htmlAttributes: new { disabled = "disabled", style="width:20em" })</td>
+    </tr>
+    <tr>
+        <td colspans="1"></td>
+        <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Auditor_CannotAdd, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;
+        The Auditor's Office could not add or modify the vendor record according for the 
+        <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;following reason(s):&nbsp;&nbsp;@Html.TextBoxFor(m => m.Auditor_CannotAdd_Reasons, htmlAttributes: new { disabled = "disabled", style="width:42em" })</td>
+    </tr>
+    <tr>
+         <td colspans="1"></td>
+       <td colspan="2" style="vertical-align: middle;">@Html.CheckBoxFor(m => m.Auditor_Resubmit, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;
+        Please submit this form with the requested information</td>
+    </tr>
+
+    <tr><td><br /></td></tr>
+
+    <tr>
+        <td style="text-align:right" colspan="3" ><i>Revised on 11/04</i></td>
+    </tr>
+</table>
+
+
+<br /><br />
+@Html.ActionLink("<< Go Back", "Index", "FormsStatus", new { TIN = @Model.Vendor_FederalTaxID }, null)

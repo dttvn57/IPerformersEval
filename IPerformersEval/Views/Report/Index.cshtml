@@ -1,0 +1,63 @@
+﻿@model IEnumerable<IPerformersEval.Models.FormsStatus>
+<div id="grid">
+
+@{
+    var grid = new WebGrid(Model, defaultSort:"PerformerName");
+}
+
+
+
+@grid.GetHtml(
+    tableStyle: "reportTable",
+    alternatingRowStyle : "reportAlternate",
+    headerStyle : "reportHeader",
+    columns: grid.Columns(
+        grid.Column("PerformerName", header:"Name"),
+        grid.Column("FormsSent", 
+                header:"Submit Date", 
+                format: item => ((item.FormsSent == null) ? "N/A" : item.FormsSent.ToShortDateString())),
+                @*
+                @<text>@ShowDate(item.FormsSent)</text>),
+                *@
+        grid.Column("TIN", canSort: false, header:"Vendor", format: @<text>@Html.ActionLink(item.TIN == null ? "Modify" : "View", item.TIN == null ? "Edit" : "Details", "Vendor", new {s=item.TIN}, null)</text>),
+        grid.Column("SubW9_TIN", canSort: false, header:"Sub W-9", format: @<text>@Html.ActionLink(item.TIN == null ? "Modify" : "View", item.SubW9_TIN == null ? "Edit" : "Details", "W9", new {s=item.SubW9_TIN}, null)</text>),
+        grid.Column("Performer_TIN", 
+                canSort: false, 
+                header:"Service Agreement", format: @<text>@Html.ActionLink(item.TIN == null ? "Modify" : "View", item.Performer_TIN == null ? "Edit" : "Details", "Performer", new {s=item.Performer_TIN}, null)</text>),    
+        grid.Column("AutoInsuranceFileName", 
+                canSort: false, 
+                header:"Auto Insurance",
+                format: @<text>@ShowImage(item.AutoInsuranceFileName)</text>),
+                
+                @*
+                header:"Auto Insurance", format: @<text>@{<a href=@item.AutoInsuranceFileName target="_blank">View</a>}</text>),
+                header:"Auto Insurance", format: @<img src="@Href(@item.AutoInsuranceFileName == null ? "" : "http://performerseval.aclibrary.org/performerseval/" + @item.AutoInsuranceFileName)"/>),
+                *@
+        grid.Column("Invoice_TIN", canSort: false, header:"Invoice", format: @<text>@Html.ActionLink("View", "Index", "Invoice", new {spec=item.Invoice_TIN}, null)</text>)
+
+       @*
+        grid.Column("ListPrice", header:"List Price")
+        grid.Column("Name", format: @<text>@Html.ActionLink((string)item.PerformerName, "Details", "Product", new {id=item.ProductId}, null)</text>)
+        grid.Column("Submit Date", header: "List Price", format: @<text>@item.ListPrice.ToString("0.00")</text>) 
+        grid.Column("SubW9_TIN", header:"Sub W-9", format: @<text>@Html.ActionLink(item.TIN == null ? "Modify" : "View", item.TIN == null ? "Edit" : "Details", "W9", new {s=item.TIN}, null)</text>)
+        *@
+        )
+    )
+
+</div>
+
+@functions {
+    static IHtmlString ShowDate(DateTime sentDate){
+        return sentDate != null ? new HtmlString(sentDate.ToShortDateString()) : null;
+    }
+    static IHtmlString ShowImage(string filename)
+    {
+        //<a href="myfile.htm"><img src="rainbow.gif"></a> 
+        //return filename != null ? new HtmlString("<img width=\"80px\" height=\"80px\" src=\"https://lib01acltest01.aclibrary.org/performerseval/" + filename + "\">") : null;
+        var absurl = @System.Web.Configuration.WebConfigurationManager.AppSettings["absurl"];
+        absurl = absurl + filename;
+        var retVal = new HtmlString("<a href=" + absurl + ">" + "<img width=\"80px\" height=\"80px\" src=" + absurl + ">");
+        return filename != null ? retVal : new HtmlString("N/A");
+////         return filename != null ? new HtmlString("<a href=\"https://lib01acltest01.aclibrary.org/performerseval/" + filename + "\"><img width=\"80px\" height=\"80px\" src=\"https://lib01acltest01.aclibrary.org/performerseval/" + filename + "\"></a>") : null;
+    }
+}

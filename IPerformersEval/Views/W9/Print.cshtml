@@ -1,0 +1,432 @@
+﻿@model IPerformersEval.Models.SubW9
+
+@{
+    Layout = "";
+}
+<div  class="PrintDoc" id="inv_container" style="position: relative" >
+<div style="position: absolute; top:5px ;right:15px; border:solid; border-width: 1px;"><img src="~/Images/tin-print.png" width="90" height="400"></div>
+    
+   
+<div>1110 - W9</div>
+<div>Rev 10/04</div>
+<div style="text-align:center; font-size:1.5em"><strong>COUNTY OF ALAMEDA</strong></div>
+<div style="text-align:center; font-size:1.5em">1221 OAK STREET, ROOM 249, OAKLAND, CA 94612</div>
+<div style="text-align:center; font-size:1.5em"><strong>Substitute IRS Form W-9</strong></div>
+<div style="text-align:center; font-size:1.5em">Request for Taxpayer Identification Number and Certification</div>
+<br/>
+<div style="text-align:left;"><i>The purpose of this form is to obtain or verify the accuracy of information regarding Alameda County's payees.</i></div>
+<div style="text-align:left;"><i>ALL, payees must have an accurate W-9 on file in the Auditor-Controller's office in order to be paid.</i></div>
+<div style="text-align:left;"><i>If you fail to furnish your correct TIN, you could be subject to a penalty.</i></div>
+<div style="text-align:left;"><b><i>The form must be <u>completed,</u> even if the information shown at the bottom of the form is accurate.</i></b></div>
+<br />
+<div><b>Please print or type.</b> Do not send to IRS. Return to Alameda County in the envelope provided.</div>
+
+<table style="width:100%; border-collapse: collapse; border:solid; border-width:1px"> 
+    <tr class="PrintDoc">
+        <td class="PrintDoc">&nbsp;&nbsp;Name on record with IRS or Social Security Administration:</td>
+    </tr>
+    <tr>
+        <td class="PrintDoc" style="border-bottom:solid; border-width:1px"><span>@Html.LabelForModel(Model.Name)</span></td>
+    </tr>
+
+    <tr>
+        <td class="PrintDoc">&nbsp;&nbsp;All DBA(s) <u>or</u> Invoice Name(s) (If different from the above name) - use attachments if neccessary:</td>
+    </tr>
+    <tr>
+        @if (Model.OtherNames != null)
+        {
+            <td class="PrintDoc" style="border-bottom:solid; border-width:1px"><span>@Html.LabelForModel(Model.OtherNames)</span></td>
+        }
+        else
+        { 
+            <td class="PrintDoc" style="border-bottom:solid; border-width:1px"><hr></td>
+        }
+    </tr>
+
+    <tr  class="PrintDoc">
+        <td class="PrintDoc">&nbsp;&nbsp;Address for Correspondence or 1099 (we will take the remittance address if different, from the invoice)</td>
+    </tr>
+    <tr>
+        @if (Model.Addr != null)
+        {
+            <td class="PrintDoc"><span>@Html.LabelForModel(Model.Addr)</span></td>
+        }
+        else
+        { 
+            <td><hr></td>
+        }
+    </tr>
+</table>
+
+
+<table style="width:100%; border-collapse: collapse; border:solid; border-width:1px">
+    <colgroup>
+        <col style="width:30%;"/>
+        <col style="width:40%;"/>
+        <col style="width:30%;"/>
+    </colgroup>
+
+    <tr>
+        <th class="PrintDoc" colspan="3" style="text-align:center">TAXPAYER IDENTIFICATION NUMBER (TIN)</th>
+    </tr>
+    <tr>
+         <td  class="PrintDoc" colspan="3" class="leftpadding">&nbsp;&nbsp;You may enter <u>only</u> one TIN and it must be the type of TIN (SSN or EIN) that is appropriate to your type of entity. If you do not have a TIN, or for further
+            information, see the instruction on the second page.</td>
+   </tr>
+
+    <tr>
+         <th class="PrintDoc" style="text-align: right; ">SOCIAL SECURITY NUMBER:&nbsp;&nbsp;</th>
+        <td class="PrintDoc" style="text-align: left;"  class="leftpadding">
+            @Html.TextBoxFor(m => m.SSN1, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.SSN2, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.SSN3, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})&nbsp;-&nbsp;
+            @Html.TextBoxFor(m => m.SSN4, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.SSN5, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})&nbsp;-&nbsp;
+            @Html.TextBoxFor(m => m.SSN6, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.SSN7, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.SSN8, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.SSN9, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+        </td>
+        <td  class="PrintDoc" rowspan="3"><div style="text-align:center; border:solid;border-width:1px; background-color:lightgray; margin-left:60px; margin-right:60px;">ONLY <u>ONE</u><br />NUMBER WILL<br />BE ACCEPTED</div></td>
+    </tr>
+
+    <tr>
+         <th class="PrintDoc" style="text-align: center; ">OR</th>
+    </tr>
+
+    <tr>
+         <th class="PrintDoc" style="text-align: right; ">EMPLOYER ID NUMBER:&nbsp;&nbsp;</th>
+        <th class="PrintDoc" style="text-align: left;" >
+            @Html.TextBoxFor(m => m.EIN1, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.EIN2, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})&nbsp;-&nbsp;
+            @Html.TextBoxFor(m => m.EIN3, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.EIN4, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.EIN5, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.EIN6, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.EIN7, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.EIN8, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+            @Html.TextBoxFor(m => m.EIN9, htmlAttributes: new {disabled = "disabled", style="width:1.25em", maxlength="1"})
+        </th>
+    </tr>
+
+    <tr class="PrintDoc">
+         <td class="PrintDoc" colspan="3" class="leftpadding">&nbsp;&nbsp;TIN <u>MUST</u> BE ENTERED REGARDLESS OF TYPE OF ENTITY (IE, NON-PROFIT, RETAIL CORPORATION, ETC)</td>
+    </tr>
+</table>
+
+<!-- Type of Entity  -->
+<table style="width:100%; border-collapse: collapse; border:solid; border-width:1px">
+    <colgroup>
+            <col style="width:50%;" /> 
+            <col style="width:50%;" /> 
+    </colgroup>
+
+    <th colspan="2" style="border-bottom:solid; border-width:1px; text-align:center;"><b>Type of Entity (Please check only one)</b></th>
+
+    <tr>
+        <td style="border-right:solid; border-width:1px" >@Html.CheckBoxFor(m => m.Individual, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;INDIVIDUAL</td>
+        <td >@Html.CheckBoxFor(m => m.SoleProprietor, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;SOLE PROPRIETOR</td>
+    </tr>
+    <tr style="border:solid; border-width:1px;">
+        <td style="border-right:solid; border-width:1px" >@Html.CheckBoxFor(m => m.Partnership, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;PARTNERSHIP</td>
+        <td >@Html.CheckBoxFor(m => m.Corporation, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;CORPORATION</td>
+    </tr>
+    <tr style="border:solid; border-width:1px;">
+        <td style="border-right:solid; border-width:1px" >@Html.CheckBoxFor(m => m.TaxExempted, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;TAX-EXEMPT ORGANIZATION UNDER SECTION 501(C)</td>
+        <td >@Html.CheckBoxFor(m => m.GovOrTrust, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;GOVERMENT OR TRUST (SPECIFY)</td>
+    </tr>
+</table>
+
+<!-- CHECK THE BOXES THAT APPLY TO <b>Alameda County's -->
+@*<div style="border-style:solid; border-width:1px;">*@
+@*<table class="noborder">*@
+<table style="width:100%; border-collapse: collapse; border:solid; border-width:1px"> 
+    <colgroup>
+        <col style="width:14%;" /> 
+        <col style="width:23%;" /> 
+        <col style="width:19%;" /> 
+        <col style="width:44%;" /> 
+    </colgroup>
+
+    <tr>
+        <td  class="PrintDoc" colspan="4" style="font-size:1.0em;border-bottom:solid; border-width:1px; padding-left: 10px;">
+            &nbsp;&nbsp;CHECK THE BOXES THAT APPLY TO <b>Alameda County's</b> PAYMENT TO YOU:
+        </td>
+    </tr>
+
+    <tr>
+        <td class="PrintDoc" >@Html.CheckBoxFor(m => m.GoodsOnly, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;GOOD ONLY</td>
+        <td class="PrintDoc" >@Html.CheckBoxFor(m => m.GoodsAndServices, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;GOODS AND SERVICES</td>
+        <td class="PrintDoc" >@Html.CheckBoxFor(m => m.RentsLeases, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;RENTS / LEASES</td>
+        <td class="PrintDoc" >@Html.CheckBoxFor(m => m.RentsLeasesAsAgent, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;RENTS / LEASES PAID TO YOU AS THE AGENT</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.CheckBoxFor(m => m.MedicalService, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;MEDICAL AND HEALTHCARE SERVICES</td>
+        <td  class="PrintDoc">@Html.CheckBoxFor(m => m.LegalService, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;LEGAL SERVICES</td>
+        <td  class="PrintDoc">@Html.CheckBoxFor(m => m.Settlement, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;SETTLEMENT</td>
+    </tr>
+    <tr>
+        <td  class="PrintDoc" colspan="2">@Html.CheckBoxFor(m => m.OtherServices, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;OTHER SERVICES - DESCRIBE:
+        </td>
+        <td class="PrintDoc" colspan="2">
+            @if (Model.OtherServices_Desc != null)
+            {
+                <span>@Html.LabelForModel(Model.OtherServices_Desc)</span>
+            }
+            else
+            { 
+                <span><hr></span>
+            }
+        </td>
+    </tr>
+</table>
+</div>
+      
+<div style="border-style:solid; border-width:1px;">
+<table class="noborder">
+      <tr>
+        <td style="font-size:1.0em;border-bottom:solid; border-width:1px" colspan="4" >@Html.CheckBoxFor(m => m.ExemptFromBackupWithHolding, htmlAttributes: new { disabled = "disabled" })
+            &nbsp;&nbsp;CHECK THIS BOX if you are exempt from backup withholding. Entities exempt from backup withholding are listed on the second page.</td>
+    </tr>
+
+    <tr>
+        <td style="font-size:1.0em;padding-left: 10px;"  colspan="4" >Certification - Under penalties of perjury, I certify that:<br />
+            (1) The number shown on this form is my correct taxpayer information number (or I am waiting for a number to be issued to me).<br />
+            (2) I am not subject to backup withholding because (a) I am exempt from backup withholding, or (b) I have not been notified by the IRS that I am subject to backup withholding as a result of failure to report all interest of dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding. (For instructions, see the second page.)
+        </td>
+    </tr>
+</table>
+</div>
+
+
+<table style="table-layout: fixed; width:100%;  page-break-after:always">
+    <colgroup>
+        <col style="width:50%;" /> 
+        <col style="width:50%;" /> 
+    </colgroup>
+
+    <tr>
+        <td style="font-size:1.0em;vertical-align: top;">
+            The purpose of this form is to verify the accuracy of the information we currently have on our records and to obtain your certification for our files. PLEASE DON’T MARK THE LABEL BELOW; WE USE IT TO VERIFY THE ACCURACY OF OUR CURRENT INFORMATION.
+       </td>
+       <td style="vertical-align: top;">
+                <table style="font-size:1.0em; border-style:solid; border-width:1px; table-layout: fixed; width:100%">   <!-- class="noborder"> -->
+                    <colgroup>
+                        <col style="width:23%; "/> 
+                        <col style="width:37%;"/> 
+                        <col style="width:1%; " /> 
+                        <col style="width:9%; " /> 
+                        <col style="width:29%;" /> 
+                    </colgroup>
+
+                   <tr>
+                       <td colspan="5">&nbsp;&nbsp;Please sign here (required).<td />
+                    </tr>
+                    <tr>
+                        <td colspan="5">&nbsp;&nbsp;Check if this signature applies to Certification (1) only&nbsp;&nbsp;@Html.CheckBoxFor(m => m.SigAppliesToCertification, htmlAttributes: new { disabled = "disabled" })<td />
+                    </tr>
+                    <tr><td><br /></td></tr>
+
+                   <tr>
+                        <td>&nbsp;&nbsp;Signature</td>
+                       <td colspan="4">
+                            @if (Model.SignedSignature != null)
+                            {
+                                <span>@Html.LabelForModel(Model.SignedSignature)</span>
+                            }
+                            else
+                            { 
+                                <span><hr></span>
+                            }
+                        <td />
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;Print name</td>
+                       <td colspan="4">
+                            @if (Model.SignedPrintName != null)
+                            {
+                                <span>@Html.LabelForModel(Model.SignedPrintName)</span>
+                            }
+                            else
+                            { 
+                                <span><hr></span>
+                            }
+                        <td />
+                    </tr>
+                   <tr>
+                        <td>&nbsp;&nbsp;Title</td>
+                        <td >
+                            @if (Model.SignedTitle != null)
+                            {
+                                <span>@Html.LabelForModel(Model.SignedTitle)</span>
+                            }
+                            else
+                            { 
+                                <span><hr></span>
+                            }
+                        
+                        <td />
+
+                         <td style="text-align: right">Date&nbsp;&nbsp;</td>
+                        <td>
+                           @if (Model.SignedDate != null)
+                            {
+                               <span> @Html.LabelForModel(Model.SignedDate.Value.ToString("dd/MM/yyyy"))</span>
+
+                            }
+                            else
+                            { 
+                                <span><hr></span>
+                            }
+                        <td />
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;Phone Number</td>
+                        <td colspan="4">
+                            @if (Model.SignedPhone != null)
+                            {
+                                <span>@Html.LabelForModel(Model.SignedPhone)</span>
+                            }
+                            else
+                            { 
+                                <span><hr></span>
+                            }
+                        <td />
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;&nbsp;Fax Number</td>
+                        <td colspan="4">
+                            @if (Model.SignedFAX != null)
+                            {
+                                <span>@Html.LabelForModel(Model.SignedFAX)</span>
+                            }
+                            else
+                            { 
+                                <span><hr></span>
+                            }
+                        <td />
+                    </tr>
+                   <tr>
+                        <td>&nbsp;&nbsp;e-mail address</td>
+                        <td colspan="4">
+                            @if (Model.SignedEmail != null)
+                            {
+                                <span>@Html.LabelForModel(Model.SignedEmail)</span>
+                            }
+                            else
+                            { 
+                                <span><hr></span>
+                            }
+                        <td />
+                    </tr>
+               </table>
+      </td>
+    </tr>
+</table>
+
+
+
+<div class="PrintDoc">
+<p style="text-align:center; font-size:1.0em">INSTRUCTIONS</p>
+</br></br>
+
+<b>Purpose of Form.</b> To furnish your correct TIN to the County and, when applicable, to (1) certify that the TIN you are furnishing is correct (or that you are waiting for a TIN), (2) certify that you are not subject to backup withholding, and (3) to claim exemption from backup withholding.
+</br></br>
+
+<b>How to obtain a TIN.</b> Individuals should obtain Form SS-5 from their local Social Security Administration. Businesses and all other entities obtain Form SS-4 from their local IRS office. If you do not have a TIN, write “Applied For” in the TIN space on the front of this form and send it to us, keeping a photocopy of the blank form. You will have 60 days to receive your TIN and send it on the photocopy to the address at the top of this form. If we do not receive your TIN within 60 days, backup withholding, if applicable, will begin and continue until you furnish your TIN.
+</br></br>
+
+<b>What is Backup Withholding?</b> Unless you are exempt (see next section), payments you receive will be subject to 30% withholding if:
+</br>
+(1) You do not furnish your TIN, or
+</br>
+(2) IRS notifies us that the TIN/Name combination your furnished is incorrect.
+</br>
+All amounts withheld will be sent to IRS. Under no circumstances will the withheld amount later be sent directly to you. The total amount withheld will be reported in Box 4 of your 1099-Misc.
+</br>
+ 
+</p>           
+<p>
+<b>Who is exempt from backup withholding of payments made by the County?</b>
+</br>
+
+1. A corporation, except a corporation which provides medical, health care, or legal services.
+</br>
+2. An organization exempt from tax under Internal Revenue Code Section 501 (a)(c).
+</br>
+3. A government.
+</br>
+4. A real estate investment trust, a common trust fund operated by a bank under section 584 (a), and a trust exempt from tax under section 664 or described in section 4947.
+</br>
+5. A financial institution.
+</p>
+
+<p>
+<b>Penalties for failure to furnish TIN.</b> You are subject to a penalty of $50 for each failure to furnish your correct TIN/Name combination unless your failure is due to reasonable cause and not to willful neglect. If you make a false statement with no reasonable basis that results in no backup withholding, you are subject to a penalty of $500. Willfully falsifying certifications or affirmations may subject you to criminal penalties including fines and/or imprisonment.
+</p>
+
+<p>
+<b>What TIN/name combination should be reported:</b>
+
+<table style="font-size:1.0em; table-layout: fixed; width:100%; border-style:solid; border-width:2px;">
+    <colgroup>
+        <col style="width:25%;" /> 
+        <col style="width:75%;" /> 
+    </colgroup>
+
+    <tr>
+        <th style="text-align:center; border-bottom: solid 2px; border-right:solid 1px">For this type of payee:</th>
+        <th style="text-align:center; border-bottom: solid; border-width:2px">Give the name* and SOCSIAL SECURITY NUMBER (SSN) of:</th>
+    </tr>
+    <tr>
+        <td style="border-bottom: solid; border-right:solid; border-width:1px">Individual</td>
+        <td style="border-bottom: solid 1px;">The individual, (Individuals’ names may never be used in combination with employers’ TINs)</td>
+    </tr>
+    <tr>
+        <td style="border-bottom: solid 2px; border-right:solid 1px;">Two or more individuals (such as two individuals who own rental property)</td>
+        <td style="border-bottom: solid 2px">One of the individuals. Choose one name to list first and circle and show his/her SSN (payments will be reported on 1099 for that name and SSN only). The invoice must match the names and order chosen.</td>
+    </tr>
+    <tr>
+        <th style="text-align:center; border-bottom: solid 2px; border-right:solid 1px;">For this type of payee:</th>
+        <th style="text-align:center; border-bottom: solid 2px; border-right:solid 1px;">Give the name and EMPLOYER IDENTIFICATION NUMBER (EIN) of:</th>
+    </tr>
+    <tr>
+        <td style="border-bottom: solid 1px; border-right:solid 1px;">Corporation</td>
+        <td style="border-bottom: solid 1px;">The corporation.</td>
+    </tr>
+    <tr>
+        <td style="border-bottom: solid 1px; border-right:solid 1px;">Partnership</td>
+        <td style="border-bottom: solid 1px;">The partnership.</td>
+    </tr>
+    <tr>
+        <td style="border-bottom: solid 1px; border-right:solid 1px;">Association, club, tax-exempt organization</td>
+        <td style="border-bottom: solid 1px;">The organization.</td>
+    </tr>
+    <tr>
+        <td style="border-bottom: solid 2px; border-right:solid 1px;">A valid trust, estate, or pension trust</td>
+        <td style="border-bottom: solid 2px;">The legal entity.</td>
+    </tr>
+
+    <tr>
+        <th style="text-align:center; border-bottom: solid 2px; border-right:solid 1px;">For this type of payee:</th>
+        <th style="text-align:center; border-bottom: solid 2px;">Give the name and SSN or EIN of:</th>
+    </tr>
+    <tr>
+        <td style="border-right:solid 1px;">Sole proprietorship</td>
+        <td>The owner. (If the owner is a married couple, choose one name to list first and circle and show his/her SSN.) Sole proprietors must show the owner’s name on the first line as the “Name on record.” On the second line, show the business name as a “dba” if that is the name on the invoice. Sole Proprietors may choose to give either an SSN or EIN.
+        </td>
+    </tr>
+</table>
+
+<strong>.</strong> If you are an individual, you must generally provide the name shown on your social security card. However, if you have changed your last name (e.g. due to marriage) without informing the Social Security Administration of the name change, please enter your first name, the last name shown on your social security card, and the new last name.
+
+<p>
+<b>Signing the certification.</b> You are required to furnish your correct TIN/name combination, but you are not required by the IRS to sign the certification unless you have been notified of an incorrect TIN/name combination. However, the County requires that you sign Certification (1). If two individuals are listed, only the one whose SSN is reported may sign the certification.
+</p>
+
+<p>
+<b>Privacy Act Notice.</b> Section 6109 requires you to furnish your correct TIN. The IRS uses the numbers for identification purposes and to help verify the accuracy of your tax return. You must provide your TIN whether or not you are required to file a tax return. Payers must generally withhold 30% of taxable payments to a payee who does not furnish a TIN. Certain penalties may also apply. If we disclose or use your TIN in violation of Federal law, we may be subject to penalties.        
+</p>
+            
+</div>

@@ -1,0 +1,125 @@
+﻿@model PerformersEval.Models.Invoice
+
+@{
+    ViewBag.Title = "Invoice";
+}
+
+@Html.ActionLink("Print Invoice", "PrintInvoice", new { invoiceId = Model.InvoiceID, ForPrinting = true } )
+&nbsp;&nbsp;&nbsp;&nbsp;
+@Html.ActionLink("<< Go Back", "Index", "FormsStatus")
+
+<p style="text-align: center;">
+<strong>ALAMEDA COUNTY LIBRARY<br /> INVOICE</strong>
+</p>
+
+    <table class="noborder">
+    <colgroup>
+        @for (var i = 0; i < 10; i++)
+        {
+            <col style="width:10%;" />
+        }
+    </colgroup>
+
+    <tr>
+        <td colspan="1">FROM</td>
+        <td style="text-align: right">Name:</td>
+        <td colspan="8"><span>@Html.TextBoxFor(m => m.Name, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td style="text-align: right">Address:</td>
+        <td colspan="8"><span>@Html.TextBoxFor(m => m.Addr1, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td style="text-align: right">City:</td>
+        <td colspan="4"><span>@Html.TextBoxFor(m => m.City, htmlAttributes: new { disabled = "disabled" })</span></td>
+        <td style="text-align: right">State:</td>
+        <td><span>@Html.TextBoxFor(m => m.State, htmlAttributes: new { disabled = "disabled",  style="width:2em", maxlength="2"})</span></td>
+        <td style="text-align: right">Zip Code:</td>
+        <td><span>@Html.TextBoxFor(m => m.Zip, htmlAttributes: new { disabled = "disabled",  style = "width:9em", maxlength = "10" })</span></td>
+    </tr>
+
+    <tr><td><br /></td></tr>
+    <tr>
+        <td colspan="2" style="text-align: right">SSN or EIN:</td>
+        <td colspan="7"><span>@Html.TextBoxFor(m => m.SSN, htmlAttributes: new { disabled = "disabled", style = "width:6em", maxlength = "9"  })</span></td>
+    </tr>
+
+    <tr><td><br /></td></tr>
+   <tr>
+        <td colspan="3">I hereby request payment in the amount of $</td>
+        <td colspan="7"><span>@Html.TextBoxFor(m => m.Payment, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+    <tr>
+        <td colspan="2">in connection with</td>
+        <td colspan="8"><span>@Html.TextBoxFor(m => m.PaymentFor1, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+   <tr>
+        <td colspan="2"></td>
+        <td colspan="8"><span>@Html.TextBoxFor(m => m.PaymentFor2, htmlAttributes: new { disabled = "disabled" })</span></td>
+    </tr>
+
+   <tr><td><br /></td></tr>
+   <tr>
+        <td colspan="1"></td>
+        <td colspan="1">SIGNATURE</td>
+       <!-- <td colspan="5"><span><input style="width:100%" type="text" name="tx_vendor_signature"></span></td> -->
+        <td colspan="5"><span>@Html.CheckBoxFor(m => m.SignedAck, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;By checking this box, you acknowledge that you've agreed to sign</span></td>
+        <td colspan="1" style="text-align: right">DATE</td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.SignedDate, "{0:MM/dd/yyyy}", htmlAttributes: new { disabled = "disabled",  style = "width:5em" })</span></td>
+    </tr>
+</table>
+
+<div style="width:85%; border-style:solid">
+<table class="noborder">
+    <colgroup>
+            <col style="width:15%;"/>
+            <col style="width:65%;"/>
+    </colgroup>
+
+    <tr>
+        <th style="text-align:left">PAY FROM ACCT.: </th>
+        <td><span>@Html.TextBoxFor(m => m.PayFromAcct, htmlAttributes: new { disabled = "disabled",  style = "width:45em" })</span></td>
+    </tr>    
+    <tr>
+        <th style="text-align:left" colspan="2">(Branch / Program manager complete this line)</th>
+    </tr>  
+</table>
+</div>
+
+<br /><br />
+    
+<table style="border-collapse: collapse; border: none 0;">
+    <colgroup>
+        @for (var i = 0; i < 10; i++)
+        {
+            <col style="width:10%;" />
+        }
+    </colgroup>
+
+    <tr>
+        <td colspan="3" style="text-align:left">EXAMINED AND APPROVED:</td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="7"><span>@Html.TextBoxFor(m => m.Manager, htmlAttributes: new { disabled = "disabled" })</span></td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.ManagerSignedDate, "{0:MM/dd/yyyy}", htmlAttributes: new { disabled = "disabled", style = "width:5em" })</span></td>
+    </tr>   
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="7" style="text-align:left">BRANCH / PROGRAM MANAGER</td>
+        <td colspan="2" style="text-align:left">DATE</td>
+    </tr>  
+    <tr><td><br /></td></tr>
+    <tr>
+        <td colspan="1"></td>
+        <td colspan="7"><span>@Html.TextBoxFor(m => m.Librarian, htmlAttributes: new { disabled = "disabled" })</span></td>
+        <td colspan="2"><span>@Html.TextBoxFor(m => m.LibrarianSignedDate, "{0:MM/dd/yyyy}", htmlAttributes: new { disabled = "disabled", style = "width:5em" })</span></td>
+    </tr>  
+    <tr>  
+        <td colspan="1"></td>
+        <td colspan="7" style="text-align:left">PRINCIPAL LIBRARIAN or DEPUTY COUNTY LIBRARIAN</td>
+        <td colspan="2" style="text-align:left">DATE</td>
+    </tr>  
+</table>

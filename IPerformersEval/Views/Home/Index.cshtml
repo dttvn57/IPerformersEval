@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+@if (TempData["STATUS"] != null)
+{   
+    <h3 style="color:red">@TempData["STATUS"]</h3>
+}
+
+<h3>Please enter your assigned user name (required)</h3>
+@using (Html.BeginForm("Index", "Report", FormMethod.Get)) 
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <table style="width: 25%; border:0 none; table-layout: fixed; border-collapse: separate">
+        <colgroup>
+                <col style="width:10%;"/>
+                <col style="width:10%;"/>
+        </colgroup>
+        <tr>
+            <th style="text-align:left; border:0 none;">User Name</th>
+            <td style="text-align:left; border:0 none;">
+                @Html.TextBox("username", null, htmlAttributes: new { required = "required", width="8em" })
+            </td>
+        </tr>
+    
+        <tr>
+            <th colspan="1"></th>
+            <td style="text-align:left; border:0 none;">
+                <input type="submit" value="Submit"/>
+             </td>
+       </tr>
+    </table>
+}

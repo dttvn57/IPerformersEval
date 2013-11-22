@@ -1,0 +1,159 @@
+﻿@model IPerformersEval.Models.Performer
+
+@{
+    ViewBag.Title = "View Service Agreement";
+
+<p style="text-align: center;">
+<strong>LIBRARY SERVICE AGREEMENT
+<br />
+FOR PAID PERFORMERS</strong>
+<br />
+BETWEEN
+<br/>
+ALAMEDA COUNTY LIBRARY
+<br/>
+AND
+<br/>
+@Html.TextBoxFor(m => m.FullName, htmlAttributes: new { disabled = "disabled", style="width:25em"})@Html.ValidationMessageFor(m => m.FullName)
+<br/>
+*Performer Name
+</p>
+}
+
+
+<p>Program Name:&nbsp;&nbsp;
+    @Html.TextBoxFor(m => m.ProgramName, htmlAttributes: new { disabled = "disabled", style="width:25em"})<br />
+Parties: The Parties to this Agreement are Alameda County Library ("the County") and ("Performer")
+<br />
+Term: The effective date of this Contract is @Html.TextBoxFor(m => m.ContractDate, "{0:MM/dd/yyyy}", htmlAttributes: new { disabled = "disabled",  style="width:5em"} )@Html.ValidationMessageFor(m => m.ContractDate) and it terminates one year from today's date.
+<br />
+Termination: This Agreement may be terminated by the County, with or without cause upon written notice to Performer. Performer may cancel the Agreement with a 7 day written notice. The indemnification provisions of the Agreement shall servive termination
+<br /><br />
+Payment Limit: The County's total payments to the Performer under this Agreement shall not exceed $@Html.TextBoxFor(m => m.Payment, htmlAttributes: new { disabled = "disabled", style="width:5em"})@Html.ValidationMessageFor(m => m.Payment) per performance. The County is not and shall not be responsible for payment of any other amount including payments to subcontractors or other working with or accompanying Performer.
+<br /><br/>
+Nondiscriminatory Services: Performer agrees that all goods and services under this Agreement shall be available to all qualified persons regardless of sex, race, religion, color, national origin, ethnic background, disability, or sexual orientation, and that none shall be used, in whole or in part, for religious workshop or instruction.
+<br /><br />
+Performer shall not solicit on Alameda County Library property including the placing of, tip jars, containers or hats.
+<br /><br />
+Independent Contractor Status: Performer is an independent contractor. This Agreement is not intended to and shall not be construed to create the relationship of agency, servant, employee, partnership, joint venture, or association between the County and Performer, or anyone working with the Performer.
+<br /><br />
+<b><u>General Liability Insurance:
+<br />
+Alameda County Library has obtained Special Event Insurance.</b></u> This coverage insures the County for general liability exposures under this Agreement. This coverage does not insyre the performer for general liability exposures under this Agreement. The County will not require the Performer to provide proof of general liability insurance.")
+
+<br /><br />
+</p>
+The Performer shall maintain:;
+<br />
+Automobile Liability Insurance:
+<br />
+    <ul><li>shall provide for bodily injury and property damage with total limits of not less than $100,000 combined single limit per occurence applicable to all owned, non-owned and hired vehicles</li></ul>
+Workers' Compensation and Employer's Liability Insurance:
+<br />
+    <ul>
+        <li>statutory California Workers' Compensation coverage");</li>
+        <li>Employer's Liability coverage for not less than $1,000,000 per occurence</li>
+        <li>This requirement may be waived in certain cases</li>
+    </ul>
+   
+
+<p>
+Notice of Cancellation:
+<br />
+All coverage as required herein shall not be cancelled or changed without 30 days prior written notice to the County of such cancallation or change. If the insurance is cancelled or terminated prior to completion of the Agreement, the Performer shall provide a new policy with the same terms. The Performer agrees to maintain continuous, uninterrupted coverage for the duration of the Agreement.
+<br /><br />
+Evidence of Coverage: Prior to commencement of this Agreement, the Performer shall provide a Certificate of Insurance in form and satisfactory to the County, evidencing that all insurance coverage's as required herein has been obtained.
+<br /><br />
+Subcontractors:
+<br />
+Performer shall include all subcontractors as an insured (covered party) under its policies or shall maintain separate certificates and endorsements for each subcontractors. All coverages for subcontractors shall be subject to all of the requirements stated herein.
+<br /><br />
+Indemification:
+<br />
+The Performer shall defend, indemnify, save, and hold harmless the Alameda County, Alaneda County Library and its officers, employees and volunteers from any and all claims, costs and liability for any damages, sickness, deth, or injury to person(s) or property, including without limitation all consequential damages, from any cause whatoever arising directly or indirectly from or connected with the operations or services of the contractor or its agentd, servants, employees or subcontractors herunder, save and except claims or litigation arising through the sole negligence or sole willful misconduct of the County or its officers or employees. Performer will reimburse the County for any expenditure, including reasonable attorneys' fees, the County may make by reason of the matters that are the subject of this indemnification, and if requested by the Library will defend any claims or litigation to which this indemnification provision applies at the sole cost and expenses of the Performer.
+<br /><br />
+By signing below, Performer acknowledges reading and agreeing to all the terms stated above.
+</p>
+
+<table style="width:60%;">
+    <colgroup>
+            <col style="width:10%;"/>
+            <col style="width:25%;"/>
+            <col style="width:5%;"/>
+            <col style="width:14%;"/>
+    </colgroup>
+
+    <tr>
+        <th colspan="4" style="text-align: center"><b>THE FOLLOWING INFORMATION MUST BE COMPLETED</b></th>
+    </tr>
+    <tr>
+        <th>NAME:&nbsp;&nbsp;</th>
+        <td colspan="3"><span>@Html.TextBoxFor(m => m.FullName2, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.FullName)</span></td>
+    </tr>    
+    <tr>
+        <th>ADDRESS:&nbsp;&nbsp;</th>
+        <td colspan="3"><span>@Html.TextBoxFor(m => m.Addr1, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.Addr1)</span></td>
+    </tr>    
+    <tr>
+        <th></th>
+        <td colspan="3"><span>@Html.TextBoxFor(m => m.Addr2, htmlAttributes: new { disabled = "disabled" })</td></span>
+    </tr>  
+    <tr>
+        <th></th>
+        <td><span>@Html.TextBoxFor(m => m.City,  htmlAttributes: new { disabled = "disabled", placeholder="City"})@Html.ValidationMessageFor(m => m.City)</span></td></span>&nbsp;&nbsp;
+        <td><span>@Html.TextBoxFor(m => m.State, htmlAttributes: new { disabled = "disabled", style="width:3em", placeholder="State", maxlength="2"})@Html.ValidationMessageFor(m => m.State)</span></td>&nbsp;&nbsp;
+        <td><span>@Html.TextBoxFor(m => m.Zip,  htmlAttributes: new { disabled = "disabled", style="width:9em", placeholder="Zip", maxlength="10"})@Html.ValidationMessageFor(m => m.Zip)</span></td>&nbsp;&nbsp;
+    </tr> 
+    <tr>
+        <th>*EMAIL:&nbsp;&nbsp;</th>
+        <td colspan="3"><span>@Html.TextBoxFor(m => m.PerformerEmail, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.PerformerEmail)</span></td>
+    </tr>  
+
+    </tr>  
+    <tr><td><br /></td></tr>
+    <tr>
+        <th>SIGNATURE:&nbsp;&nbsp;</th>
+        <td colspan="3">@Html.CheckBoxFor(m => m.PersonalInfoAckSig, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;By checking this box, you acknowledge that you've agreed to sign</td>
+    </tr>    
+</table>
+
+<!-- </div> -->
+<br /><br />
+
+<p>
+For Workers' Compensation Waiver, please have Performer sign this declaration:
+</p>
+<br />
+<div style="text-align: center;"><strong>Declaration:</strong></div>
+<p>
+With respect to the above-mentioned business, I hereby warrant that the business has no employees other than the owners, officers, directors, partners or other principals who have elected to be exempt from Workers' Compensation coverage in accordance with California law.
+<br />
+I further warrant that I understand the requirements of section 3700 et seq. of the California Labor Code with respect to providing Workers' Compensation coverage for any employees of the above mentioned business. I agree to comply with the code requirements and all other applicable laws and regulations regarding workers compensation, payroll taxes, FICA and tax withholding and similar employment issues. I further agree to hold the County of Alameda harmless from loss or liability which may arise from the failure of the above-mentioned business to comply with any such laws or regulations. I therefore request that the County of Alameda waive its requirement for the evidence of Workers' Compensation insurance in connection with the above-referenced work.
+</p>
+
+<table class="noborder" >
+    <colgroup>
+            <col style="width:10%;"/>
+            <col style="width:65%;"/>
+            <col style="width:25%;"/>
+    </colgroup>
+    <tr>
+        <th style="text-align:left">Signature</th>
+        <td colspan="3">Owner, Officer, Director, Partnership or other Principal:</td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td>@Html.CheckBoxFor(m => m.OfficialAckSig, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;By checking this box, you acknowledge that you've agreed to sign</td>
+        <td><span>Date: @Html.TextBoxFor(m => m.SignedDate, "{0:MM/dd/yyyy}", htmlAttributes: new { disabled = "disabled", style="width:5em" })</span></td>
+    </tr>    
+    <tr>
+        <th colspan="1"></th>
+        <td><span>@Html.TextBoxFor(m => m.PrintName, htmlAttributes: new { disabled = "disabled",  placeholder="*Print/Type Name" })@Html.ValidationMessageFor(m => m.PrintName)</span></td>&nbsp;
+        <td><span>@Html.TextBoxFor(m => m.Title, htmlAttributes: new { disabled = "disabled",  placeholder="Title" })</span></td>
+    </tr>    
+</table>
+
+@*
+<br /><br />
+@Html.ActionLink("<< Go Back", "Index", "FormsStatus", new { TIN = @Model.Performer_TIN }, null)
+*@
