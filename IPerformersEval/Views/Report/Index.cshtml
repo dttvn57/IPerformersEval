@@ -15,15 +15,19 @@
         grid.Column("PerformerName", header:"Name"),
         grid.Column("FormsSent", 
                 header:"Submit Date", 
-                format: item => ((item.FormsSent == null) ? "N/A" : item.FormsSent.ToShortDateString())),
+                format: item => ((item.FormsSent == null) ? "n/a" : item.FormsSent.ToShortDateString())),
                 @*
                 @<text>@ShowDate(item.FormsSent)</text>),
                 *@
-        grid.Column("TIN", canSort: false, header:"Vendor", format: @<text>@Html.ActionLink(item.TIN == null ? "Modify" : "View", item.TIN == null ? "Edit" : "Details", "Vendor", new {s=item.TIN}, null)</text>),
-        grid.Column("SubW9_TIN", canSort: false, header:"Sub W-9", format: @<text>@Html.ActionLink(item.TIN == null ? "Modify" : "View", item.SubW9_TIN == null ? "Edit" : "Details", "W9", new {s=item.SubW9_TIN}, null)</text>),
+        grid.Column("TIN",
+                header:"Vendor",
+                format: @<text>@Html.ActionLink(item.TIN == null ? "n/a" : "View", item.TIN == null ? "NA" : "Details", "Vendor", new {s=item.TIN}, null)</text>),
+        grid.Column("SubW9_TIN", 
+                header:"Sub W-9", 
+                format: @<text>@Html.ActionLink(item.SubW9_TIN == null ? "n/a" : "View", item.SubW9_TIN == null ? "NA" : "Details", "W9", new {s=item.SubW9_TIN}, null)</text>),
         grid.Column("Performer_TIN", 
-                canSort: false, 
-                header:"Service Agreement", format: @<text>@Html.ActionLink(item.TIN == null ? "Modify" : "View", item.Performer_TIN == null ? "Edit" : "Details", "Performer", new {s=item.Performer_TIN}, null)</text>),    
+                header:"Service Agreement", 
+                format: @<text>@Html.ActionLink(item.Performer_TIN == null ? "n/a" : "View", item.Performer_TIN == null ? "NA" : "Details", "Performer", new {s=item.Performer_TIN}, null)</text>),    
         grid.Column("AutoInsuranceFileName", 
                 canSort: false, 
                 header:"Auto Insurance",
@@ -33,8 +37,13 @@
                 header:"Auto Insurance", format: @<text>@{<a href=@item.AutoInsuranceFileName target="_blank">View</a>}</text>),
                 header:"Auto Insurance", format: @<img src="@Href(@item.AutoInsuranceFileName == null ? "" : "http://performerseval.aclibrary.org/performerseval/" + @item.AutoInsuranceFileName)"/>),
                 *@
-        grid.Column("Invoice_TIN", canSort: false, header:"Invoice", format: @<text>@Html.ActionLink("View", "Index", "Invoice", new {spec=item.Invoice_TIN}, null)</text>)
-
+        grid.Column("Invoice_TIN", 
+                canSort: false, 
+                header:"Invoice", 
+                format: @<text>@Html.ActionLink(item.Invoice_TIN == null ? "n/a" : "View", item.Invoice_TIN == null ? "NA" : "Index", "Invoice", new {spec=item.Invoice_TIN}, null)</text>)
+                @*
+                format: @<text>@Html.ActionLink("View", "Index", "Invoice", new {spec=item.Invoice_TIN}, null)</text>)
+                *@
        @*
         grid.Column("ListPrice", header:"List Price")
         grid.Column("Name", format: @<text>@Html.ActionLink((string)item.PerformerName, "Details", "Product", new {id=item.ProductId}, null)</text>)
@@ -57,7 +66,7 @@
         var absurl = @System.Web.Configuration.WebConfigurationManager.AppSettings["absurl"];
         absurl = absurl + filename;
         var retVal = new HtmlString("<a href=" + absurl + ">" + "<img width=\"80px\" height=\"80px\" src=" + absurl + ">");
-        return filename != null ? retVal : new HtmlString("N/A");
+        return filename != null ? retVal : new HtmlString("n/a");
 ////         return filename != null ? new HtmlString("<a href=\"https://lib01acltest01.aclibrary.org/performerseval/" + filename + "\"><img width=\"80px\" height=\"80px\" src=\"https://lib01acltest01.aclibrary.org/performerseval/" + filename + "\"></a>") : null;
     }
 }

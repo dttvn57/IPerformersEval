@@ -32,7 +32,17 @@ namespace IPerformersEval.Controllers
         // GET: /Report/
         public ActionResult Index(string username)
         {
-            bool isFUAdmin = IsFinAdmin(username);
+            string user = username;
+            if (user == null)
+                user = (string)Session["username"];
+            else
+            {
+                Session["username"] = username;
+            }
+            if (user == null)
+                user = "";
+
+            bool isFUAdmin = IsFinAdmin(user);
             if (isFUAdmin)
             {
                 return View(_db.AllFormsStatus.ToList());

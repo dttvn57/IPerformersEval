@@ -21,6 +21,11 @@ namespace IPerformersEval.Controllers
             //return Json("This Email Address has already been registered", JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult NA()
+        {
+            return RedirectToAction("Index", "Report");
+        }
+
         public ActionResult Index()
         {
             //var model = from 

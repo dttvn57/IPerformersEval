@@ -16,6 +16,11 @@ namespace IPerformersEval.Controllers
         //
         // GET: /Vendor/
 
+        public ActionResult NA()
+        {
+            return RedirectToAction("Index", "Report");
+        }
+
         public ActionResult Index()
         {
             return View(new Vendor());

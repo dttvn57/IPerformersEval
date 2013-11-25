@@ -13,6 +13,11 @@ namespace IPerformersEval.Controllers
     {
         PerformersDB _db = new PerformersDB();
 
+        public ActionResult NA()
+        {
+            return RedirectToAction("Index", "Report");
+        }
+
         //
         // GET: /Invoice/
 

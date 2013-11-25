@@ -1,12 +1,15 @@
-﻿@model PerformersEval.Models.Invoice
+﻿@model IPerformersEval.Models.Invoice
 
 @{
     ViewBag.Title = "Invoice";
 }
 
 @Html.ActionLink("Print Invoice", "PrintInvoice", new { invoiceId = Model.InvoiceID, ForPrinting = true } )
+
+@*
 &nbsp;&nbsp;&nbsp;&nbsp;
 @Html.ActionLink("<< Go Back", "Index", "FormsStatus")
+*@
 
 <p style="text-align: center;">
 <strong>ALAMEDA COUNTY LIBRARY<br /> INVOICE</strong>

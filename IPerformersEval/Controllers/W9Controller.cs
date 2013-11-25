@@ -16,6 +16,11 @@ namespace IPerformersEval.Controllers
         //
         // GET: /W9/
 
+        public ActionResult NA()
+        {
+            return RedirectToAction("Index", "Report");
+        }
+
         public ActionResult Index()
         {
             return View(new SubW9());
