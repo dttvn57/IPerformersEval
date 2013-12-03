@@ -14,7 +14,8 @@ namespace IPerformersEval.DAL
         public PerformersDB()
             : base("name=DefaultConnection")
         {
-/////          Database.SetInitializer(new MigrateDatabaseToLatestVersion<PerformersDB, PerformersEval.Migrations.Configuration>("DefaultConnection"));
+            Database.SetInitializer<PerformersDB>(null);
+            /////          Database.SetInitializer(new MigrateDatabaseToLatestVersion<PerformersDB, PerformersEval.Migrations.Configuration>("DefaultConnection"));
              // Database.SetInitializer<PerformersDB>(new DropCreateDatabaseAlways<PerformersDB>());
         }
 

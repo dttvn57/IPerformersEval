@@ -160,24 +160,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311211837110_initial.cs" />
-    <Compile Include="Migrations\201311211837110_initial.Designer.cs">
-      <DependentUpon>201311211837110_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311221655312_initial2.cs" />
-    <Compile Include="Migrations\201311221655312_initial2.Designer.cs">
-      <DependentUpon>201311221655312_initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311221829230_initial3.cs" />
-    <Compile Include="Migrations\201311221829230_initial3.Designer.cs">
-      <DependentUpon>201311221829230_initial3.cs</DependentUpon>
+    <Compile Include="Migrations\201312022140580_initial.cs" />
+    <Compile Include="Migrations\201312022140580_initial.Designer.cs">
+      <DependentUpon>201312022140580_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FormsStatus.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Performer.cs" />
     <Compile Include="Models\SubW9.cs" />
-    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -239,6 +230,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Browsers\qt.browser" />
+    <None Include="Properties\PublishProfiles\release test IIS.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\Delete.gif" />
     <Content Include="Images\logo.png" />
@@ -310,14 +302,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311211837110_initial.resx">
-      <DependentUpon>201311211837110_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311221655312_initial2.resx">
-      <DependentUpon>201311221655312_initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311221829230_initial3.resx">
-      <DependentUpon>201311221829230_initial3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201312022140580_initial.resx">
+      <DependentUpon>201312022140580_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
