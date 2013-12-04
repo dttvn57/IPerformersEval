@@ -1,4 +1,56 @@
-﻿.reportTable{
+﻿.PrintDoc {
+    font-size:1.25em;
+}
+tr.PrintDoc {
+    font-size:1.25em;
+}th.PrintDoc {
+    font-size:1.25em;
+}
+td.PrintDoc {
+    font-size:1.25em;
+}
+
+.TIN {
+    float: right;
+}
+
+table.thinborder {
+    border-collapse: collapse; 
+    border:solid; 
+    border-width:1px;
+}
+
+tr.thinbordertop {
+    border-top:solid; 
+    border-width:1px;
+}
+
+td.thinborderbottom {
+    border-bottom:solid; 
+    border-width:1px;
+}
+td.inputthinborder {
+    border-right:solid; 
+    border-left:solid; 
+    border-width:1px; 
+    padding-left:10px;
+}
+
+td.checkboxwithborder {
+    border:solid; 
+    border-width:1px; 
+    text-align: left; 
+    vertical-align: middle;
+    padding-left: 20px;
+}
+
+.leftpadding {
+    padding-left:10px;
+}
+
+/* ----------------------------------------------------- */
+
+.reportTable{
     border : 1px solid #809FFF;
     background-color: #E6FFFF;
     color:  #6078BF;
@@ -432,14 +484,22 @@ fieldset {
             padding-bottom: 5px;
         }
 
+/*
 label {
     display: block;
     font-size: 1.2em;
     font-weight: 600;
 }
+*/
 
 label.checkbox {
     display: inline;
+}
+
+span {
+    display: block;
+    overflow: hidden;
+    padding-right:10px;
 }
 
 input, textarea {
@@ -449,7 +509,8 @@ input, textarea {
     font-size: 1.2em;
     margin: 5px 0 6px 0;
     padding: 5px;
-    width: 300px;
+    width:100%;
+   /* width: 450px;*/
 }
 
 textarea {
@@ -479,6 +540,17 @@ textarea {
         margin-right: 8px;
         width: auto;
     }
+
+     input[type="radio"] {
+        font-size: 1em;
+        padding: 4px;
+        margin-right: 4px;
+    }   
+    td input[type="radio"]{
+        font-size: 1em;
+        padding: 4px;
+        margin-right: 4px;
+    }   
 
     td input[type="submit"],
     td input[type="button"],
@@ -545,6 +617,47 @@ input[type="checkbox"].input-validation-error {
 
 /* tables
 ----------------------------------------------------------*/
+.tablecollapse {
+    border-collapse: separate;
+    border-spacing: 5px;
+    margin-top: 0.75em;
+    border: solid;
+    width:100%;
+    table-layout: fixed;
+}
+.tablethinborder {
+    border-collapse: collapse; 
+    border:solid; 
+    border-width:1px;
+    width:100%;
+    table-layout: fixed;
+}
+
+.thinbordertop {
+    border-top:solid; 
+    border-width:1px;
+}
+
+.thinborderbottom {
+    border-bottom:solid; 
+    border-width:1px;
+}
+.inputthinborder {
+    border-right:solid; 
+    border-left:solid; 
+    border-width:1px; 
+    padding-left:10px;
+}
+
+.checkboxwithborder {
+    border:solid; 
+    border-width:1px; 
+    text-align: left; 
+    vertical-align: middle;
+    padding-left: 20px;
+}
+
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -558,6 +671,7 @@ th {
     border: none 0px;
     padding-left: 0;
 }
+
 
     th a {
         display: block;

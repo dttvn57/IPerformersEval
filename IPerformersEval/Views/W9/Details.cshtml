@@ -34,7 +34,7 @@
 <br />
 <div><b>Please print or type.</b> Do not send to IRS. Return to Alameda County in the envelope provided.</div>
 
-<table class="thinborder"> 
+<table class="tablethinborder"> 
     <tr class="thinbordertop">
         <td class="inputthinborder">Name on record with IRS or Social Security Administration:</td>
     </tr>
@@ -194,7 +194,10 @@
             The purpose of this form is to verify the accuracy of the information we currently have on our records and to obtain your certification for our files. PLEASE DON’T MARK THE LABEL BELOW; WE USE IT TO VERIFY THE ACCURACY OF OUR CURRENT INFORMATION.
        </td>
        <td style="vertical-align: top;">
+           @*
                 <table  style="border-style:solid; border-width:1px;">   <!-- class="noborder"> -->
+           *@
+           <table class="tablecollapse">
                     <colgroup>
                         <col style="width:15%;" /> 
                         <col style="width:45%;"/> 
@@ -211,7 +214,7 @@
                     <tr><td><br /></td></tr>
 
                    <tr>
-                        <td>Signature</td>
+                        <td style="border: 0 none">Signature</td>
                         <td colspan="3"><span>@Html.TextBoxFor(m => m.SignedSignature, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.SignedSignature)</span><td />
                     </tr>
                     <tr>

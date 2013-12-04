@@ -234,6 +234,8 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\Delete.gif" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\tin-print.png" />
+    <Content Include="Images\tin.png" />
     <Content Include="NuGet.exe" />
     <Content Include="Rotativa\libeay32.dll" />
     <Content Include="Rotativa\libgcc_s_dw2-1.dll" />
@@ -294,9 +296,10 @@
     <Content Include="Views\Invoice\Print.cshtml" />
     <Content Include="Views\W9\Details.cshtml" />
     <Content Include="Views\W9\Print.cshtml" />
-    <Content Include="Views\Vendor\Details.cshtml" />
     <Content Include="Views\Vendor\VendorForm.cshtml" />
     <Content Include="Views\Performer\Details.cshtml" />
+    <Content Include="Views\Performer\Print.cshtml" />
+    <Content Include="Views\Vendor\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

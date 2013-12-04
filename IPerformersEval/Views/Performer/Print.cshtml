@@ -1,8 +1,7 @@
 ﻿@model IPerformersEval.Models.Performer
 
 @{
-    ViewBag.Title = "View Service Agreement";
-@Html.ActionLink("Print", "PrintPerformer", new { spec = Model.PerformerID }, new { onclick = "alertPrint();" } )
+    Layout = "";
 
 <p style="text-align: center;">
 <strong>LIBRARY SERVICE AGREEMENT
@@ -15,22 +14,22 @@ ALAMEDA COUNTY LIBRARY
 <br/>
 AND
 <br/>
-@Html.TextBoxFor(m => m.FullName, htmlAttributes: new { disabled = "disabled", style="width:25em"})@Html.ValidationMessageFor(m => m.FullName)
+@Html.LabelForModel(Model.FullName)
 <br/>
-*Performer Name
+(Performer)
 </p>
 }
 
 
 <p>Program Name:&nbsp;&nbsp;
-    @Html.TextBoxFor(m => m.ProgramName, htmlAttributes: new { disabled = "disabled", style="width:25em"})<br />
+    @Html.LabelForModel(Model.ProgramName)<br />
 Parties: The Parties to this Agreement are Alameda County Library ("the County") and ("Performer")
 <br />
-Term: The effective date of this Contract is @Html.TextBoxFor(m => m.ContractDate, "{0:MM/dd/yyyy}", htmlAttributes: new { disabled = "disabled",  style="width:5em"} )@Html.ValidationMessageFor(m => m.ContractDate) and it terminates one year from today's date.
+Term: The effective date of this Contract is @Html.LabelForModel(Model.ContractDate.Value.ToString("dd/MM/yyyy")) and it terminates one year from today's date.
 <br />
 Termination: This Agreement may be terminated by the County, with or without cause upon written notice to Performer. Performer may cancel the Agreement with a 7 day written notice. The indemnification provisions of the Agreement shall servive termination
 <br /><br />
-Payment Limit: The County's total payments to the Performer under this Agreement shall not exceed $@Html.TextBoxFor(m => m.Payment, htmlAttributes: new { disabled = "disabled", style="width:5em"})@Html.ValidationMessageFor(m => m.Payment) per performance. The County is not and shall not be responsible for payment of any other amount including payments to subcontractors or other working with or accompanying Performer.
+Payment Limit: The County's total payments to the Performer under this Agreement shall not exceed $@Html.LabelForModel(Model.Payment.ToString()) per performance. The County is not and shall not be responsible for payment of any other amount including payments to subcontractors or other working with or accompanying Performer.
 <br /><br/>
 Nondiscriminatory Services: Performer agrees that all goods and services under this Agreement shall be available to all qualified persons regardless of sex, race, religion, color, national origin, ethnic background, disability, or sexual orientation, and that none shall be used, in whole or in part, for religious workshop or instruction.
 <br /><br />
@@ -89,25 +88,25 @@ By signing below, Performer acknowledges reading and agreeing to all the terms s
     </tr>
     <tr>
         <th>NAME:&nbsp;&nbsp;</th>
-        <td colspan="3"><span>@Html.TextBoxFor(m => m.FullName2, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.FullName)</span></td>
+        <td colspan="3"><span>@Html.LabelForModel(Model.FullName2)</span></td>
     </tr>    
     <tr>
         <th>ADDRESS:&nbsp;&nbsp;</th>
-        <td colspan="3"><span>@Html.TextBoxFor(m => m.Addr1, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.Addr1)</span></td>
+        <td colspan="3"><span>@Html.LabelForModel(Model.Addr1)</span></td>
     </tr>    
     <tr>
         <th></th>
-        <td colspan="3"><span>@Html.TextBoxFor(m => m.Addr2, htmlAttributes: new { disabled = "disabled" })</td></span>
+        <td colspan="3"><span>@Html.LabelForModel(Model.Addr2)</td></span>
     </tr>  
     <tr>
         <th></th>
-        <td><span>@Html.TextBoxFor(m => m.City,  htmlAttributes: new { disabled = "disabled", placeholder="City"})@Html.ValidationMessageFor(m => m.City)</span></td></span>&nbsp;&nbsp;
-        <td><span>@Html.TextBoxFor(m => m.State, htmlAttributes: new { disabled = "disabled", style="width:3em", placeholder="State", maxlength="2"})@Html.ValidationMessageFor(m => m.State)</span></td>&nbsp;&nbsp;
-        <td><span>@Html.TextBoxFor(m => m.Zip,  htmlAttributes: new { disabled = "disabled", style="width:9em", placeholder="Zip", maxlength="10"})@Html.ValidationMessageFor(m => m.Zip)</span></td>&nbsp;&nbsp;
+        <td><span>@Html.LabelForModel(Model.City)</span></td>&nbsp;&nbsp;
+        <td><span>@Html.LabelForModel(Model.State)</span></td>&nbsp;&nbsp;
+        <td><span>@Html.LabelForModel(Model.Zip)</span></td>&nbsp;&nbsp;
     </tr> 
     <tr>
         <th>*EMAIL:&nbsp;&nbsp;</th>
-        <td colspan="3"><span>@Html.TextBoxFor(m => m.PerformerEmail, htmlAttributes: new { disabled = "disabled" })@Html.ValidationMessageFor(m => m.PerformerEmail)</span></td>
+        <td colspan="3"><span>@Html.LabelForModel(Model.PerformerEmail)</span></td>
     </tr>  
 
     </tr>  
@@ -145,31 +144,16 @@ I further warrant that I understand the requirements of section 3700 et seq. of 
     <tr>
         <td colspan="1"></td>
         <td>@Html.CheckBoxFor(m => m.OfficialAckSig, htmlAttributes: new { disabled = "disabled" })&nbsp;&nbsp;By checking this box, you acknowledge that you've agreed to sign</td>
-        <td><span>Date: @Html.TextBoxFor(m => m.SignedDate, "{0:MM/dd/yyyy}", htmlAttributes: new { disabled = "disabled", style="width:5em" })</span></td>
+        <td><span>Date: @if (Model.SignedDate != null) 
+                        {
+                             @Html.LabelForModel(Model.SignedDate.Value.ToString("dd/MM/yyyy")) 
+                        } 
+            </span>
+        </td>
     </tr>    
     <tr>
         <th colspan="1"></th>
-        <td><span>@Html.TextBoxFor(m => m.PrintName, htmlAttributes: new { disabled = "disabled",  placeholder="*Print/Type Name" })@Html.ValidationMessageFor(m => m.PrintName)</span></td>&nbsp;
-        <td><span>@Html.TextBoxFor(m => m.Title, htmlAttributes: new { disabled = "disabled",  placeholder="Title" })</span></td>
+        <td><span>@Html.LabelForModel(Model.PrintName)</span></td>&nbsp;
+        <td><span>@Html.LabelForModel(Model.Title)</span></td>
     </tr>    
 </table>
-
-
-@section Scripts {
-<script type="text/javascript">
-    function alertPrint(result) {
-        var msg = "The Service Agreement has been saved to " + @Model.Performer_TIN + "_SA.pdf in your Downloads folder. Please print.";
-        alert(msg);
-        @*
-        $("#workSchedule").append(result); 
-        var pdfUrl = "C:\\Users\\tdang\\Downloads\\" + @Model.TIN.ToString() + "_SubW9.pdf";
-        *@
-    }
-</script>
-    
-}
-
-@*
-<br /><br />
-@Html.ActionLink("<< Go Back", "Index", "FormsStatus", new { TIN = @Model.Performer_TIN }, null)
-*@

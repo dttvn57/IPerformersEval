@@ -345,9 +345,15 @@ namespace IPerformersEval.Controllers
 
         public ActionResult PrintW9(int spec = 0)
         {
+            SubW9 w9 = _db.SubW9s.Find(spec);
+            if (w9 == null)
+            {
+                TempData["STATUS"] = "Sub W-9 not Found.";
+                return RedirectToAction("Index", "FormsStatus");//, new { TIN = 0 });
+            }
             return new ActionAsPdf(
                            "Print",
-                           new { id = spec }) { FileName = spec.ToString() + "_SubW9.pdf" };
+                           new { id = spec }) { FileName = w9.TIN + "_SubW9.pdf" };
 
         }
 
